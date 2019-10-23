@@ -1,0 +1,73 @@
+1.git命令
+    分支
+    git branch 分支名       创建分支
+    git branch              查看所有分支
+    git checkout 分支名      切换分支
+    对分支上文件内容的修改不会影响其他分支的内容
+    
+    练习:
+        回到master分支，重新创建一条新的分支v2
+        切换到v2分支，创建a.txt
+        切换到master分支，查看a.txt的影响
+        切换到v2分支，将a.txt提交
+        切换到master分支,查看a.txt的变化
+        切换到v2分支，输入数据进a.txt
+        切换到master，查看效果
+        切换到v2分支，将a.txt暂存
+        切换到master看效果
+        切换到v2分支, 将a.txt commit
+        切换到master看效果
+
+    合并分支
+        git merge 分支名称
+        将指定分支的修改合并到当前分支
+        在master上使用git merge v1
+        将v1的修改合并到master上，master的内容会发生变化，v1的内容不会改变
+
+        删除分支
+            git branch -d 分支名
+            git branch -D 分支名 (强制删除)
+            当前分支不能删除，必须切换到其他分支后才能删除
+-----------------------------------------------------------------------
+2.Github社区
+    1)创建一个远程仓库
+        点击右上角的加号
+        选择new repository
+        在repository name里填写远程仓库名称
+        description可以不写，默认选中public
+        readme.md可以不点
+        直接点击create repository
+    2)将远程仓库与本地仓库关联
+        git remote 不带参数，列出已经存在的远程分支
+        git remote add [shortname] [url远程仓库地址]
+        shortname 添加的远程仓库的名称，指代后面的地址，(不一定是origin)
+    3)将本地仓库的内容推送给远程仓库
+        git push -u origin master
+        将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。
+        不带任何参数的git push，默认只推送当前分支，叫做simple方式。此外，还有一种matching方式，会推送所有有对应的远程分支的本地分支
+        git push    推送
+            -u      第一次推送时添加，之后不再需要
+            origin  指代远程仓库的地址
+            master  推送到远程仓库的master分支上
+            
+        删除某一个远程关联      git remote remove 指代词
+    4)从远程仓库下载代码
+        -傻瓜式下载   clone or download
+        -git pull命令
+            在本地仓库中使用该命令
+            git pull 远程仓库的地址 master
+            保留所有的提交信息
+        -git clone命令
+            不需要在本地仓库中使用
+            git clone 远程仓库地址
+            下载下来的是一个完整的仓库文件夹
+    5)推送给远程仓库的方式:https/ssh
+        https在每次推送时，都需要用户名和密码来验证
+        ssh方式不需要用户名和密码，但是需要配置密钥
+        密钥包含公钥和私钥两部分
+        密钥的生成:
+            ssh-keygen -t rsa -C '邮箱地址'
+            一路回车
+            生成 id_rsa,id_rsa.pub两个文件
+            其中pub为公钥,另一个为私钥
+            使用工具打开pub文件,复制里面的内容,添加到Github中
